@@ -6,6 +6,8 @@ import { TodoEditDescriptionComponent } from '../Todo Edit Description Component
 interface TodoItemProps {
     todo: TodoItem;
     onDelete: (todos: TodoItem) => void;
+    editDes: TodoItem['description'];
+
 }
 interface TodoItemState {
     onOff: boolean;
@@ -58,7 +60,8 @@ export class TodoItemComponent extends React.Component<TodoItemProps, TodoItemSt
                     <div>
                         {this.props.todo.description}
                         <TodoEditDescriptionComponent 
-                            todo={todo}
+                            todo={this.props.todo}
+                            editDes={this.props.editDes}
                         />
                     </div>
                 )}

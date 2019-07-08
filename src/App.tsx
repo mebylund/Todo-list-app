@@ -41,6 +41,12 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+  handleEditDes = (todo: TodoItem['description']) => {
+    this.setState({
+      //with new array that I created with .map
+    });
+  }
+
   public render() {
     return (
 
@@ -55,6 +61,7 @@ class App extends React.Component<{}, AppState> {
           <TodoListComponent
             todos={this.state.listArray}
             onDelete={this.deleteTodo}
+            editDes={this.hanldeEditDes}                 
 
           />
 

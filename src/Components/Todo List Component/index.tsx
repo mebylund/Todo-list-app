@@ -8,6 +8,8 @@ import { TodoItemComponent } from '../Todo Item Component';
 interface TodoListProps {
     todos: TodoItem[];
     onDelete: (todos: TodoItem) => void;
+    editDes: TodoItem['description'];
+
 }
 
 interface TodoListState {
@@ -33,7 +35,8 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
                         <li key={todo.id}>
                             <TodoItemComponent 
                                 todo={todo}
-                                onDelete={this.props.onDelete}                    
+                                onDelete={this.props.onDelete}   
+                                editDes={this.props.editDes}                 
                             />
 
                         </li>

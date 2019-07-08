@@ -3,6 +3,7 @@ import { TodoItem } from '../../Types/todo-item';
 import { FormControlLabel, Switch, Button } from '@material-ui/core';
 
 interface EditDescProps {
+    editDes: TodoItem['description'];
     todo: TodoItem;
 }
 interface EditDescState {
@@ -33,7 +34,7 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
 
     public render() {
         return (
-            <div> 
+            <div>
                 {/* switch button */}
                 <FormControlLabel
                     control={
@@ -46,7 +47,19 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
                     }
                     label="Edit Description"
                 />
+
+                {this.state.onOff && (
+                    <div>
+                        {this.props.todo.description}
+                    </div>
+                )}
+
+
             </div>
+
+
+
         )
     }
+
 }
