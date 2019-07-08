@@ -42,6 +42,8 @@ class App extends React.Component<{}, AppState> {
 
           <InputComponent onChange={this.todoAdded} />
 
+          <h1>Hello World</h1>
+
           <TodoListComponent
             todos={this.state.listArray}
             onDelete={this.deleteTodo}
