@@ -1,11 +1,21 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import { TodoItem } from '../../Types/todo-item';
+import { v1 } from 'uuid';
+
+
 
 interface InputComponentProps {
-    onChange: (todo: string) => void;
+    onChange: (todo: TodoItem) => void;
 }
 
 interface InputComponentState {
-    todoValue: string;
+    todoTitle: string;
+    todoDescription: string;
+    onOff: boolean;
 }
 
 export class InputComponent extends React.Component<InputComponentProps, InputComponentState> {
@@ -13,36 +23,100 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
         super(props);
 
         this.state = {
-            todoValue: ''
+            todoTitle: '',
+            todoDescription: '',
+            onOff: false
         };
     }
 
-    onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ todoValue: e.target.value });
+    onValueChange = (e: any) => {
+        this.setState({ todoTitle: e.target.value });
+    };
+    onValueChangeDes = (e: any) => {
+        this.setState({ todoDescription: e.target.value });
     };
 
     addTodo = () => {
-        this.props.onChange(this.state.todoValue);
+        const todo: TodoItem = {
+            title: this.state.todoTitle,
+            description: this.state.todoDescription,
+            id: v1()
+        };
+
+        this.props.onChange(todo);
+
     };
 
     handleKey = (e: any) => {
-        
-        if(e.key == "Enter"){
+
+        if (e.key == "Enter") {
             this.addTodo();
             this.setState({
-                todoValue:''
+                todoTitle: ''
+            });
+        }
+    }
+
+    handleChange = () => {
+        if (this.state.onOff == true) {
+            this.setState({
+                onOff: false
+            });
+        }
+        if (this.state.onOff == false) {
+            this.setState({
+                onOff: true
             });
         }
     }
 
     public render() {
         return (
-            <div onKeyDown={this.handleKey}>
-                <input
-                    onChange={(e) => this.onValueChange(e)}
+            <div>
+                <TextField
+                    onKeyDown={this.handleKey}
+                    id="standard-name"
+                    label="Add Todo"
                     placeholder="Add Todo"
-                    value={this.state.todoValue} />
-                <button onClick={() => this.addTodo()}>Add</button>
+                    onChange={(e) => this.onValueChange(e)}
+                    margin="normal"
+                    value={this.state.todoTitle}
+                />
+
+                {/* switch button */}
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={this.state.onOff}
+                            onChange={(e) => this.handleChange()}
+                            value="checkedB"
+                            color="primary"
+                        />
+                    }
+                    label="Add Description"
+                />
+
+                <Button onClick={() => this.addTodo()} variant="contained" color="primary" >
+                    Add
+                </Button>
+
+
+                {this.state.onOff && (
+                    <div>
+                        <TextField
+                            id="standard-multiline-static"
+                            multiline
+                            rows="4"
+                            label="Add Description"
+                            placeholder="Add Description"
+                            margin="normal"
+                            onChange={(e) => this.onValueChangeDes(e)}
+
+                        />
+                    </div>
+                )}
+
+
             </div>
         );
     }
