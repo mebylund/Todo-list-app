@@ -41,9 +41,16 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
-  handleEditDes = (todo: TodoItem['description']) => {
+  handleEditDes = (todo: TodoItem) => {
+    var newDes = [...this.state.listArray].map(item => {
+      if(item.title === todo.title){
+        item = {...todo};
+      }
+      return item
+
+    });
     this.setState({
-      //with new array that I created with .map
+      listArray: newDes
     });
   }
 
@@ -61,7 +68,7 @@ class App extends React.Component<{}, AppState> {
           <TodoListComponent
             todos={this.state.listArray}
             onDelete={this.deleteTodo}
-            editDes={this.hanldeEditDes}                 
+            editDes={this.handleEditDes}                 
 
           />
 

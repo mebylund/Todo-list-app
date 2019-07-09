@@ -6,7 +6,7 @@ import { TodoEditDescriptionComponent } from '../Todo Edit Description Component
 interface TodoItemProps {
     todo: TodoItem;
     onDelete: (todos: TodoItem) => void;
-    editDes: TodoItem['description'];
+    editDes: (todos: TodoItem) => void;
 
 }
 interface TodoItemState {
@@ -23,12 +23,12 @@ export class TodoItemComponent extends React.Component<TodoItemProps, TodoItemSt
     }
 
     handleChange = () => {
-        if (this.state.onOff == true) {
+        if (this.state.onOff === true) {
             this.setState({
                 onOff: false
             });
         }
-        if (this.state.onOff == false) {
+        if (this.state.onOff === false) {
             this.setState({
                 onOff: true
             });

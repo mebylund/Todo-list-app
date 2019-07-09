@@ -8,7 +8,7 @@ import { TodoItemComponent } from '../Todo Item Component';
 interface TodoListProps {
     todos: TodoItem[];
     onDelete: (todos: TodoItem) => void;
-    editDes: TodoItem['description'];
+    editDes: (todos: TodoItem) => void;
 
 }
 

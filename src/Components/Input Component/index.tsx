@@ -49,21 +49,22 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
 
     handleKey = (e: any) => {
 
-        if (e.key == "Enter") {
+        if (e.key === "Enter") {
             this.addTodo();
             this.setState({
-                todoTitle: ''
+                todoTitle: '',
+                todoDescription:''
             });
         }
     }
 
     handleChange = () => {
-        if (this.state.onOff == true) {
+        if (this.state.onOff === true) {
             this.setState({
                 onOff: false
             });
         }
-        if (this.state.onOff == false) {
+        if (this.state.onOff === false) {
             this.setState({
                 onOff: true
             });
@@ -104,13 +105,14 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
                 {this.state.onOff && (
                     <div>
                         <TextField
+                            onKeyDown={this.handleKey}
                             id="standard-multiline-static"
-                            multiline
                             rows="4"
                             label="Add Description"
                             placeholder="Add Description"
                             margin="normal"
                             onChange={(e) => this.onValueChangeDes(e)}
+                            value={this.state.todoDescription}
 
                         />
                     </div>

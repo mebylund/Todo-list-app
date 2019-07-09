@@ -1,13 +1,18 @@
 import React from 'react';
 import { TodoItem } from '../../Types/todo-item';
-import { FormControlLabel, Switch, Button } from '@material-ui/core';
+import { FormControlLabel, Switch, TextField } from '@material-ui/core';
+import { v1 } from 'uuid';
+import { conditionalExpression } from '@babel/types';
+
 
 interface EditDescProps {
-    editDes: TodoItem['description'];
+    editDes: (todos: TodoItem) => void;
     todo: TodoItem;
 }
 interface EditDescState {
     onOff: boolean;
+    todoDescription: string;
+    todoTitle: string;
 }
 
 export class TodoEditDescriptionComponent extends React.Component<EditDescProps, EditDescState>{
@@ -15,19 +20,46 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
         super(props);
 
         this.state = {
-            onOff: false
+            onOff: false,
+            todoDescription: this.props.todo['description'],
+            todoTitle: this.props.todo['title']
         };
     }
 
     handleChange = () => {
-        if (this.state.onOff == true) {
+        if (this.state.onOff === true) {
             this.setState({
                 onOff: false
             });
         }
-        if (this.state.onOff == false) {
+        if (this.state.onOff === false) {
             this.setState({
                 onOff: true
+            });
+        }
+    }
+
+    addTodoDes = () => {
+        const todo: TodoItem = {
+            title: this.state.todoTitle,
+            description: this.state.todoDescription,
+            id: v1()
+        };
+        console.log(todo);
+        this.props.editDes(todo);
+
+    };
+
+    onValueChangeDes = (e: any) => {
+        this.setState({ todoDescription: e.target.value });
+    };
+
+    handleKey = (e: any) => {
+
+        if (e.key === "Enter") {
+            this.addTodoDes();
+            this.setState({
+                todoDescription: ''
             });
         }
     }
@@ -50,7 +82,17 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
 
                 {this.state.onOff && (
                     <div>
-                        {this.props.todo.description}
+                        
+                        <TextField
+                            onKeyDown={this.handleKey}
+                            id="standard-multiline-static"
+                            rows="4"
+                            label="Edit Description"
+                            placeholder='Edit Description'
+                            margin="normal"
+                            onChange={(e) => this.onValueChangeDes(e)}
+                            value={this.state.todoDescription}
+                        />
                     </div>
                 )}
 
