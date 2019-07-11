@@ -25,22 +25,23 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
         };
     }
 
-    
+
 
     public render() {
         return (
             <div>
                 <ul>
-                    {this.props.todos.map(todo => (
-                        <li key={todo.id}>
-                            <TodoItemComponent 
-                                todo={todo}
-                                onDelete={this.props.onDelete}   
-                                editDes={this.props.editDes}                 
-                            />
+                    {this.props.todos.filter(item => item.isActive)
+                        .map(todo => (
+                            <li key={todo.id}>
+                                <TodoItemComponent
+                                    todo={todo}
+                                    onDelete={this.props.onDelete}
+                                    editDes={this.props.editDes}
+                                />
 
-                        </li>
-                    ))}
+                            </li>
+                        ))}
                 </ul>
             </div>
         )

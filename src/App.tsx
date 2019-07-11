@@ -4,6 +4,7 @@ import './App.css';
 import { InputComponent } from './Components/Input Component';
 import { TodoListComponent } from './Components/Todo List Component';
 import { TodoItem } from './Types/todo-item';
+import { DeletedListComponent } from './Components/Deleted List Component';
 // import 
 
 interface AppState {
@@ -19,7 +20,8 @@ class App extends React.Component<{}, AppState> {
         {
           id: 'asdfs-1dfdsfs-12321',
           title: 'Groceries',
-          description: 'Get my groceries'
+          description: 'Get my groceries',
+          isActive: true
         }
       ]
     }
@@ -32,9 +34,25 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
+  reAdd = (todo: TodoItem) => {
+    const todos = this.state.listArray.map(todoA => {
+      if(todoA.id === todo.id){
+        todo.isActive = true;
+      };
+      return todoA;
+    });
+    this.setState({
+      listArray: todos
+    });
+  }
+
+
   deleteTodo = (todo: TodoItem) => {
-    const todos = this.state.listArray.filter(todoA => {
-      return todoA.id !== todo.id;
+    const todos = this.state.listArray.map(todoA => {
+      if(todoA.id === todo.id){
+        todoA.isActive = false;
+      };
+      return todoA;
     });
     this.setState({
       listArray: todos
@@ -70,6 +88,10 @@ class App extends React.Component<{}, AppState> {
             onDelete={this.deleteTodo}
             editDes={this.handleEditDes}                 
 
+          />
+          <DeletedListComponent 
+            onChange={this.reAdd}
+            listArray={this.state.listArray}
           />
 
           {/* <p>

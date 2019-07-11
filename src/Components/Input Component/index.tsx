@@ -16,6 +16,7 @@ interface InputComponentState {
     todoTitle: string;
     todoDescription: string;
     onOff: boolean;
+    todoActive: boolean;
 }
 
 export class InputComponent extends React.Component<InputComponentProps, InputComponentState> {
@@ -25,7 +26,8 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
         this.state = {
             todoTitle: '',
             todoDescription: '',
-            onOff: false
+            onOff: false,
+            todoActive: true
         };
     }
 
@@ -40,7 +42,8 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
         const todo: TodoItem = {
             title: this.state.todoTitle,
             description: this.state.todoDescription,
-            id: v1()
+            id: v1(),
+            isActive: this.state.todoActive
         };
 
         this.props.onChange(todo);
