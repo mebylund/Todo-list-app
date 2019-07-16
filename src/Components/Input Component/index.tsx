@@ -47,6 +47,10 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
         };
 
         this.props.onChange(todo);
+        this.setState({
+            todoTitle: '',
+            todoDescription:''
+        });
 
     };
 

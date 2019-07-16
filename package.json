@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^3.4.5"
+    "@types/uuid": "^3.4.5",
+    "eslint-plugin-react-hooks": "^1.6.1"
   }
 }

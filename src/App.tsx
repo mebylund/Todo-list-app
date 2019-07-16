@@ -5,6 +5,7 @@ import { InputComponent } from './Components/Input Component';
 import { TodoListComponent } from './Components/Todo List Component';
 import { TodoItem } from './Types/todo-item';
 import { DeletedListComponent } from './Components/Deleted List Component';
+import { SortingComponent } from './Components/Sorting Component';
 // import 
 
 interface AppState {
@@ -36,7 +37,7 @@ class App extends React.Component<{}, AppState> {
 
   reAdd = (todo: TodoItem) => {
     const todos = this.state.listArray.map(todoA => {
-      if(todoA.id === todo.id){
+      if (todoA.id === todo.id) {
         todo.isActive = true;
       };
       return todoA;
@@ -49,7 +50,7 @@ class App extends React.Component<{}, AppState> {
 
   deleteTodo = (todo: TodoItem) => {
     const todos = this.state.listArray.map(todoA => {
-      if(todoA.id === todo.id){
+      if (todoA.id === todo.id) {
         todoA.isActive = false;
       };
       return todoA;
@@ -61,8 +62,8 @@ class App extends React.Component<{}, AppState> {
 
   handleEditDes = (todo: TodoItem) => {
     var newDes = [...this.state.listArray].map(item => {
-      if(item.title === todo.title){
-        item = {...todo};
+      if (item.title === todo.title) {
+        item = { ...todo };
       }
       return item
 
@@ -72,10 +73,10 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+
   public render() {
+
     return (
-
-
 
       <div className="App">
         <header className="App-header">
@@ -83,13 +84,16 @@ class App extends React.Component<{}, AppState> {
 
           <InputComponent onChange={this.todoAdded} />
 
+          <SortingComponent />
+          
+        
           <TodoListComponent
             todos={this.state.listArray}
             onDelete={this.deleteTodo}
-            editDes={this.handleEditDes}                 
+            editDes={this.handleEditDes}
 
           />
-          <DeletedListComponent 
+          <DeletedListComponent
             onChange={this.reAdd}
             listArray={this.state.listArray}
           />
