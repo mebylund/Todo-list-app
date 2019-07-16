@@ -1,8 +1,12 @@
 import React from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
+import { TodoItem } from '../../Types/todo-item';
 
+interface SortingComponentProps {
+    changeSort: (sortType: string) => void;
+}
 
-export function SortingComponent() {
+export function SortingComponent(props: SortingComponentProps) {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -11,7 +15,8 @@ export function SortingComponent() {
     }
 
     function handleClose() {
-        setAnchorEl(null);
+        setAnchorEl(null);  
+        props.changeSort('alphabetically');
     }
 
     return (
@@ -27,7 +32,7 @@ export function SortingComponent() {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Alphabetically</MenuItem>
-                <MenuItem onClick={handleClose}>Reverse Alphabetically</MenuItem>
+                {/* <MenuItem onClick={handleClose}>Reverse Alphabetically</MenuItem> */}
                 {/* <MenuItem onClick={handleClose}>Logout</MenuItem> */}
             </Menu>
         </div>

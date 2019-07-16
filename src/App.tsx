@@ -73,6 +73,21 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+  changeSort = (sortType: string) => {
+    if (sortType === 'alphabetically') {
+      this.alphabetically();
+    }
+  };
+
+  alphabetically = () => {
+    var sortAplpha = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
+      return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+    });
+    this.setState({
+      listArray: sortAplpha
+    })
+  }
+
 
   public render() {
 
@@ -84,7 +99,7 @@ class App extends React.Component<{}, AppState> {
 
           <InputComponent onChange={this.todoAdded} />
 
-          <SortingComponent />
+          <SortingComponent changeSort={this.changeSort} />
           
         
           <TodoListComponent
