@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { TodoItem } from '../../Types/todo-item';
 
 interface SortingComponentProps {
     changeSort: (sortType: string) => void;

@@ -18,6 +18,7 @@ interface InputComponentState {
     onOff: boolean;
     todoActive: boolean;
     dateCreated: Date;
+    priority: number;
 }
 
 export class InputComponent extends React.Component<InputComponentProps, InputComponentState> {
@@ -29,7 +30,8 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
             todoDescription: '',
             onOff: false,
             todoActive: true,
-            dateCreated: new Date()
+            dateCreated: new Date(),
+            priority: 0
         };
     }
 
@@ -46,7 +48,8 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
             description: this.state.todoDescription,
             id: v1(),
             isActive: this.state.todoActive,
-            dateCreated: this.state.dateCreated
+            dateCreated: new Date(),
+            priority: 4
         };
 
         this.props.onChange(todo);

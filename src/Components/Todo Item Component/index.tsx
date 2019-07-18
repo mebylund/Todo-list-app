@@ -7,7 +7,6 @@ interface TodoItemProps {
     todo: TodoItem;
     onDelete: (todos: TodoItem) => void;
     editDes: (todos: TodoItem) => void;
-
 }
 interface TodoItemState {
     onOff: boolean;

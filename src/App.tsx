@@ -20,10 +20,12 @@ class App extends React.Component<{}, AppState> {
       listArray: [
         {
           id: 'asdfs-1dfdsfs-12321',
-          title: 'Groceries',
+          title: 'groceries',
           description: 'Get my groceries',
           isActive: true,
-          dateCreated: new Date()
+          dateCreated: new Date(),
+          priority: 4
+
         }
       ]
     }
@@ -103,13 +105,15 @@ class App extends React.Component<{}, AppState> {
     })
   }
   datecreated = () => {
-    var sortrevAplpha = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
-      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
+    var sortDate = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
+      return a.dateCreated > b.dateCreated ? 1: -1;
     });
     this.setState({
-      listArray: sortrevAplpha
+      listArray: sortDate
     })
   }
+
+  
 
   
 
@@ -130,7 +134,6 @@ class App extends React.Component<{}, AppState> {
             todos={this.state.listArray}
             onDelete={this.deleteTodo}
             editDes={this.handleEditDes}
-
           />
           <DeletedListComponent
             onChange={this.reAdd}

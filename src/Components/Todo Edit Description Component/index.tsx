@@ -3,6 +3,8 @@ import { TodoItem } from '../../Types/todo-item';
 import { FormControlLabel, Switch, TextField } from '@material-ui/core';
 import { v1 } from 'uuid';
 import { conditionalExpression } from '@babel/types';
+import { EditPriorityComponent } from '../Edit Priority Component';
+import { TodoItemComponent } from '../Todo Item Component';
 
 
 interface EditDescProps {
@@ -15,6 +17,7 @@ interface EditDescState {
     todoTitle: string;
     todoActive: boolean;
     dateCreated: Date;
+    priority: number;
 }
 
 export class TodoEditDescriptionComponent extends React.Component<EditDescProps, EditDescState>{
@@ -26,7 +29,9 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             todoDescription: this.props.todo['description'],
             todoTitle: this.props.todo['title'],
             todoActive: this.props.todo['isActive'],
-            dateCreated: new Date()
+            dateCreated: new Date(),
+            priority: this.props.todo.priority
+
         };
     }
 
@@ -49,7 +54,9 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             description: this.state.todoDescription,
             id: v1(),
             isActive: this.state.todoActive,
-            dateCreated: this.state.dateCreated
+            dateCreated: this.state.dateCreated,
+            priority: this.state.priority
+
         };
         console.log(todo);
         this.props.editDes(todo);
@@ -70,6 +77,10 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
         }
     }
 
+    editPri = (num: number) => {
+        return this.setState({priority: num})
+    }
+
     public render() {
         return (
             <div>
@@ -83,22 +94,23 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
                             color="primary"
                         />
                     }
-                    label="Edit Description"
+                    label="Edit Description and Priority"
                 />
 
                 {this.state.onOff && (
                     <div>
-                        
+
                         <TextField
                             onKeyDown={this.handleKey}
                             id="standard-multiline-static"
-                            rows="4"
                             label="Edit Description"
                             placeholder='Edit Description'
                             margin="normal"
                             onChange={(e) => this.onValueChangeDes(e)}
                             value={this.state.todoDescription}
                         />
+                        {`Priority: ${this.state.priority}`}
+                         <EditPriorityComponent editPri={this.editPri}/>
                     </div>
                 )}
 

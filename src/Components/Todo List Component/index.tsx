@@ -9,7 +9,6 @@ interface TodoListProps {
     todos: TodoItem[];
     onDelete: (todos: TodoItem) => void;
     editDes: (todos: TodoItem) => void;
-
 }
 
 interface TodoListState {

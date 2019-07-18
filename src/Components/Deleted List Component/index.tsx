@@ -17,7 +17,7 @@ interface DeletedListComponentState {
     onOff: boolean;
     todoActive: boolean;
     dateCreated: Date;
-
+    priority: number;
 }
 
 export class DeletedListComponent extends React.Component<DeletedListComponentProps, DeletedListComponentState> {
@@ -29,7 +29,8 @@ export class DeletedListComponent extends React.Component<DeletedListComponentPr
             todoDescription: '',
             onOff: false,
             todoActive: true,
-            dateCreated: new Date()
+            dateCreated: new Date(),
+            priority: 0
         };
     }
 

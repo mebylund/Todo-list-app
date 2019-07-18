@@ -6,5 +6,6 @@ export interface TodoItem {
         title: string
         isActive: boolean
         dateCreated: Date
+        priority: number
 }
 
