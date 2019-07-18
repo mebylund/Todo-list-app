@@ -5,5 +5,6 @@ export interface TodoItem {
         description: string
         title: string
         isActive: boolean
+        dateCreated: Date
 }
 

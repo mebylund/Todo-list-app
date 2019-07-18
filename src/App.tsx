@@ -22,7 +22,8 @@ class App extends React.Component<{}, AppState> {
           id: 'asdfs-1dfdsfs-12321',
           title: 'Groceries',
           description: 'Get my groceries',
-          isActive: true
+          isActive: true,
+          dateCreated: new Date()
         }
       ]
     }
@@ -77,6 +78,12 @@ class App extends React.Component<{}, AppState> {
     if (sortType === 'alphabetically') {
       this.alphabetically();
     }
+    if (sortType === 'revalpha'){
+      this.revalpha();
+    }
+    if (sortType === 'datecreated'){
+      this.datecreated();
+    }
   };
 
   alphabetically = () => {
@@ -87,7 +94,24 @@ class App extends React.Component<{}, AppState> {
       listArray: sortAplpha
     })
   }
+  revalpha = () => {
+    var sortrevAplpha = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
+      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
+    });
+    this.setState({
+      listArray: sortrevAplpha
+    })
+  }
+  datecreated = () => {
+    var sortrevAplpha = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
+      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
+    });
+    this.setState({
+      listArray: sortrevAplpha
+    })
+  }
 
+  
 
   public render() {
 

@@ -14,6 +14,7 @@ interface EditDescState {
     todoDescription: string;
     todoTitle: string;
     todoActive: boolean;
+    dateCreated: Date;
 }
 
 export class TodoEditDescriptionComponent extends React.Component<EditDescProps, EditDescState>{
@@ -24,7 +25,8 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             onOff: false,
             todoDescription: this.props.todo['description'],
             todoTitle: this.props.todo['title'],
-            todoActive: this.props.todo['isActive']
+            todoActive: this.props.todo['isActive'],
+            dateCreated: new Date()
         };
     }
 
@@ -46,7 +48,8 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             title: this.state.todoTitle,
             description: this.state.todoDescription,
             id: v1(),
-            isActive: this.state.todoActive
+            isActive: this.state.todoActive,
+            dateCreated: this.state.dateCreated
         };
         console.log(todo);
         this.props.editDes(todo);

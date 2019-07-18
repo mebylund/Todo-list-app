@@ -14,9 +14,17 @@ export function SortingComponent(props: SortingComponentProps) {
         setAnchorEl(event.currentTarget);
     }
 
-    function handleClose() {
-        setAnchorEl(null);  
-        props.changeSort('alphabetically');
+    function handleClose(type: string) {
+        setAnchorEl(null);
+        if (type === 'revalpha') {
+            props.changeSort('revalpha');
+        }
+        if (type === 'alphabetically'){
+            props.changeSort('alphabetically');
+        }
+        if(type === 'datecreated'){
+            props.changeSort('datecreated');
+        }
     }
 
     return (
@@ -31,9 +39,9 @@ export function SortingComponent(props: SortingComponentProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Alphabetically</MenuItem>
-                {/* <MenuItem onClick={handleClose}>Reverse Alphabetically</MenuItem> */}
-                {/* <MenuItem onClick={handleClose}>Logout</MenuItem> */}
+                <MenuItem onClick={(e) => handleClose('alphabetically')}>Alphabetically</MenuItem>
+                <MenuItem onClick={(e) => handleClose('revalpha')}>Reverse Alphabetically</MenuItem>
+                <MenuItem onClick={(e) => handleClose('datecreated')}>Date Created</MenuItem>
             </Menu>
         </div>
     )
