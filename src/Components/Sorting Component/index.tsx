@@ -24,6 +24,9 @@ export function SortingComponent(props: SortingComponentProps) {
         if(type === 'datecreated'){
             props.changeSort('datecreated');
         }
+        if(type === 'priority'){
+            props.changeSort('priority');
+        }
     }
 
     return (
@@ -41,6 +44,7 @@ export function SortingComponent(props: SortingComponentProps) {
                 <MenuItem onClick={(e) => handleClose('alphabetically')}>Alphabetically</MenuItem>
                 <MenuItem onClick={(e) => handleClose('revalpha')}>Reverse Alphabetically</MenuItem>
                 <MenuItem onClick={(e) => handleClose('datecreated')}>Date Created</MenuItem>
+                <MenuItem onClick={(e) => handleClose('priority')}>Priority</MenuItem>
             </Menu>
         </div>
     )

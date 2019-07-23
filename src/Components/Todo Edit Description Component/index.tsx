@@ -2,9 +2,7 @@ import React from 'react';
 import { TodoItem } from '../../Types/todo-item';
 import { FormControlLabel, Switch, TextField } from '@material-ui/core';
 import { v1 } from 'uuid';
-import { conditionalExpression } from '@babel/types';
 import { EditPriorityComponent } from '../Edit Priority Component';
-import { TodoItemComponent } from '../Todo Item Component';
 
 
 interface EditDescProps {
@@ -17,7 +15,7 @@ interface EditDescState {
     todoTitle: string;
     todoActive: boolean;
     dateCreated: Date;
-    priority: number;
+    editPriority: number;
 }
 
 export class TodoEditDescriptionComponent extends React.Component<EditDescProps, EditDescState>{
@@ -30,7 +28,7 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             todoTitle: this.props.todo['title'],
             todoActive: this.props.todo['isActive'],
             dateCreated: new Date(),
-            priority: this.props.todo.priority
+            editPriority: this.props.todo['priority']
 
         };
     }
@@ -55,10 +53,9 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
             id: v1(),
             isActive: this.state.todoActive,
             dateCreated: this.state.dateCreated,
-            priority: this.state.priority
+            priority: this.state.editPriority
 
         };
-        console.log(todo);
         this.props.editDes(todo);
 
     };
@@ -78,7 +75,12 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
     }
 
     editPri = (num: number) => {
-        return this.setState({priority: num})
+        console.log(num);
+        this.setState({
+            editPriority: num
+        }, () => {
+            this.addTodoDes();
+        }); 
     }
 
     public render() {
@@ -109,7 +111,7 @@ export class TodoEditDescriptionComponent extends React.Component<EditDescProps,
                             onChange={(e) => this.onValueChangeDes(e)}
                             value={this.state.todoDescription}
                         />
-                        {`Priority: ${this.state.priority}`}
+                        {`Priority: ${this.state.editPriority}`}
                          <EditPriorityComponent editPri={this.editPri}/>
                     </div>
                 )}

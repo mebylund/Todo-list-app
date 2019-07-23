@@ -49,7 +49,7 @@ export class InputComponent extends React.Component<InputComponentProps, InputCo
             id: v1(),
             isActive: this.state.todoActive,
             dateCreated: new Date(),
-            priority: 4
+            priority: 3
         };
 
         this.props.onChange(todo);

@@ -24,7 +24,7 @@ class App extends React.Component<{}, AppState> {
           description: 'Get my groceries',
           isActive: true,
           dateCreated: new Date(),
-          priority: 4
+          priority: 3
 
         }
       ]
@@ -86,6 +86,9 @@ class App extends React.Component<{}, AppState> {
     if (sortType === 'datecreated'){
       this.datecreated();
     }
+    if(sortType === 'priority'){
+      this.priority();
+    }
   };
 
   alphabetically = () => {
@@ -110,6 +113,14 @@ class App extends React.Component<{}, AppState> {
     });
     this.setState({
       listArray: sortDate
+    })
+  }
+  priority = () => {
+    var sortpri = [...this.state.listArray].sort((a:TodoItem, b:TodoItem) => {
+      return a.priority > b.priority ? 1: -1;
+    });
+    this.setState({
+      listArray: sortpri
     })
   }
 
